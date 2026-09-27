@@ -1,6 +1,6 @@
 "use client";
 
-import { useAction, useMutation, useQuery } from "convex/react";
+import { useAction, useMutation, useQuery } from "@/lib/pg/react";
 import { getErrorMessage } from "@/lib/errors";
 import {
   ArrowRight,

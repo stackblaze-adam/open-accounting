@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation, useQuery } from "convex/react";
+import { useMutation, useQuery } from "@/lib/pg/react";
 import { AlertCircle, CalendarClock } from "lucide-react";
 import { useState } from "react";
 

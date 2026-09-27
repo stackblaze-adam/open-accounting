@@ -1,6 +1,6 @@
 "use client";
 
-import { useAction, useQuery } from "convex/react";
+import { useAction, useQuery } from "@/lib/pg/react";
 import { anyApi, type FunctionReference } from "convex/server";
 import {
   CheckCircle2,

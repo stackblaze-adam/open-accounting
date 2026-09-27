@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/pg/react";
 import Link from "next/link";
 import { CheckCircle2, ShieldCheck, TriangleAlert } from "lucide-react";
 import type { ReactNode } from "react";

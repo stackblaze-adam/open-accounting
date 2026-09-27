@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation, useQuery } from "convex/react";
+import { useMutation, useQuery } from "@/lib/pg/react";
 import { getErrorMessage } from "@/lib/errors";
 import { ChevronDown, ChevronUp, GripVertical, Pencil, Plus, Sparkles, Trash2, X } from "lucide-react";
 import { useMemo, useState } from "react";

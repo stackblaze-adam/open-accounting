@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuthActions, useConvexAuth } from "@convex-dev/auth/react";
-import { useAction, useQuery } from "convex/react";
+import { useAction, useQuery } from "@/lib/pg/react";
 import { getErrorMessage } from "@/lib/errors";
 import { toast } from "sonner";
 import Link from "next/link";
@@ -129,7 +129,7 @@ function sidebarChildLinks(sectionHref: string) {
 }
 
 export function AppShell({ children }: { children: ReactNode }) {
-  if (!process.env.NEXT_PUBLIC_CONVEX_URL) {
+  if (!process.env.NEXT_PUBLIC_CONVEX_URL && process.env.NEXT_PUBLIC_OPENBOOKS_BACKEND !== "postgres") {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background px-4">
         <div className="w-full max-w-sm rounded-[14px] border bg-card p-5 shadow-xs ring-1 ring-foreground/10">

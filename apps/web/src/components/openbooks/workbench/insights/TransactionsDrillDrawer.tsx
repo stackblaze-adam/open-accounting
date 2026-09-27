@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/pg/react";
 import { ArrowDownLeft, ArrowUpRight } from "lucide-react";
 
 import { api } from "../../../../../../../convex/_generated/api";

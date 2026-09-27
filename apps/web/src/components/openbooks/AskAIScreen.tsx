@@ -1,7 +1,7 @@
 "use client";
 
 import { useConvexAuth } from "@convex-dev/auth/react";
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/pg/react";
 
 import { api } from "../../../../../convex/_generated/api";
 import { AskAIWidget } from "@/components/openbooks/AskAIWidget";

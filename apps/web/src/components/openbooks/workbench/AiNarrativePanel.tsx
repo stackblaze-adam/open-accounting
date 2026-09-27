@@ -1,6 +1,6 @@
 "use client";
 
-import { useAction } from "convex/react";
+import { useAction } from "@/lib/pg/react";
 import { getErrorMessage } from "@/lib/errors";
 import { RefreshCw, Sparkles, TriangleAlert } from "lucide-react";
 import { useState } from "react";

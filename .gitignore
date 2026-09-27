@@ -17,6 +17,10 @@ coverage/
 !.env.example
 env.local
 
+# Convex snapshot exports and local Postgres files
+backups/
+data/
+
 # Vercel and Convex local state
 .vercel/
 .convex/

@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuthActions, useConvexAuth } from "@convex-dev/auth/react";
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/pg/react";
 import { mapAuthError } from "@/lib/auth-errors";
 import { ArrowRight, LockKeyhole } from "lucide-react";
 import { FormEvent, useState } from "react";

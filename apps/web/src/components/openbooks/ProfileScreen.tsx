@@ -2,7 +2,7 @@
 
 import { useAuthActions } from "@convex-dev/auth/react";
 import { getErrorMessage } from "@/lib/errors";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation, useQuery } from "@/lib/pg/react";
 import type { FunctionReturnType } from "convex/server";
 import { Check, KeyRound, UserRound } from "lucide-react";
 import { FormEvent, useMemo, useState } from "react";

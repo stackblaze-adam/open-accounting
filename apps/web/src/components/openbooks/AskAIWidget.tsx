@@ -6,7 +6,7 @@ import {
   useUIMessages,
   type UIMessage,
 } from "@convex-dev/agent/react";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation, useQuery } from "@/lib/pg/react";
 import { getErrorMessage } from "@/lib/errors";
 import {
   Check,

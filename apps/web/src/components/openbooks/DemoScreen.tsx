@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/pg/react";
 import { ArrowRight, Lock } from "lucide-react";
 import Link from "next/link";
 import type React from "react";

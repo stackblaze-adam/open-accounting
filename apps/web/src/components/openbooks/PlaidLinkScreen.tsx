@@ -1,6 +1,6 @@
 "use client";
 
-import { useAction } from "convex/react";
+import { useAction } from "@/lib/pg/react";
 import { getErrorMessage } from "@/lib/errors";
 import { Loader2 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";

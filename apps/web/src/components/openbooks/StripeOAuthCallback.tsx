@@ -1,6 +1,6 @@
 "use client";
 
-import { useAction } from "convex/react";
+import { useAction } from "@/lib/pg/react";
 import { getErrorMessage } from "@/lib/errors";
 import { CheckCircle2, CircleAlert } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";

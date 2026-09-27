@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/pg/react";
 import { Printer } from "lucide-react";
 
 import { Amount, formatMinorMoney } from "@/components/openbooks/primitives";

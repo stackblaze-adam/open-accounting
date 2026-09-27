@@ -1,6 +1,6 @@
 "use client";
 
-import { useAction, useMutation, useQuery } from "convex/react";
+import { useAction, useMutation, useQuery } from "@/lib/pg/react";
 import type { FunctionReference } from "convex/server";
 import {
   AlertTriangle,

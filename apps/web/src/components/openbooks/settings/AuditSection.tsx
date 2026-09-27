@@ -1,6 +1,6 @@
 "use client";
 
-import { usePaginatedQuery } from "convex/react";
+import { usePaginatedQuery } from "@/lib/pg/react";
 import { Search } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 

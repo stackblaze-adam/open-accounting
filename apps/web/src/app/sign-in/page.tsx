@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { openBooksDevAuthBypassEnabled } from "@/lib/openbooks/dev-mode";
 
 export default function SignInPage() {
-  const convexConfigured = Boolean(process.env.NEXT_PUBLIC_CONVEX_URL);
+  const signInReady =
+    Boolean(process.env.NEXT_PUBLIC_CONVEX_URL) || process.env.NEXT_PUBLIC_OPENBOOKS_BACKEND === "postgres";
   const devAuthBypass = openBooksDevAuthBypassEnabled();
 
   return (
@@ -36,7 +37,7 @@ export default function SignInPage() {
             Sign in with your existing account. New users can join a workspace with an invite from the owner or team members.
           </p>
         </div>
-        {convexConfigured ? (
+        {signInReady ? (
           <Suspense fallback={<div className="rounded-lg border bg-card p-5 text-sm text-muted-foreground shadow-xs">Loading sign-in…</div>}>
             <SignInForm devAuthBypass={devAuthBypass} />
           </Suspense>

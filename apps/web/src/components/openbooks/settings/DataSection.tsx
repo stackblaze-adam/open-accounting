@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { getErrorMessage } from "@/lib/errors";
 
-import { useAction, useConvex, useMutation, useQuery } from "convex/react";
+import { useAction, useConvex, useMutation, useQuery } from "@/lib/pg/react";
 import { useState } from "react";
 
 import { api } from "../../../../../../convex/_generated/api";

@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/pg/react";
 import { AlertTriangle } from "lucide-react";
 import { useMemo, useState, type ReactNode } from "react";
 

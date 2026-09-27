@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/pg/react";
 import { Check, Copy } from "lucide-react";
 import { useState } from "react";
 

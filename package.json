@@ -13,7 +13,8 @@
     }
   },
   "scripts": {
-    "dev": "pnpm --filter @openbooks/web dev",
+    "dev": "docker compose up -d && pnpm --filter @openbooks/web dev",
+    "pg:import": "tsx server/pg/import-cli.ts",
     "setup": "node scripts/setup.mjs",
     "dev:full": "node scripts/dev-full.mjs",
     "build": "pnpm --filter @openbooks/web build",
@@ -44,10 +45,12 @@
     "@edge-runtime/vm": "^5.0.0",
     "@playwright/test": "^1.60.0",
     "@types/node": "^20.19.42",
+    "@types/pg": "^8.23.1",
     "convex-test": "^0.0.53",
     "next": "16.2.7",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "tsx": "^4.23.15",
     "typescript": "^5.9.3",
     "vite": "^8.0.16",
     "vitest": "^4.1.8"
@@ -64,6 +67,8 @@
     "ai": "^6.0.202",
     "convex": "^1.40.0",
     "convex-helpers": "^0.1.119",
-    "jose": "6.2.3"
+    "drizzle-orm": "^0.45.3",
+    "jose": "6.2.3",
+    "pg": "^8.23.0"
   }
 }

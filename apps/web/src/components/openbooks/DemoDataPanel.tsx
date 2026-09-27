@@ -1,6 +1,6 @@
 "use client";
 
-import { useAction, useQuery } from "convex/react";
+import { useAction, useQuery } from "@/lib/pg/react";
 import { DatabaseBackup, RefreshCw } from "lucide-react";
 import type { ReactNode } from "react";
 import { useState } from "react";

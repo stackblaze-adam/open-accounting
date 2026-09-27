@@ -45,7 +45,7 @@ function StaticRequestAccessForm() {
 }
 
 export function RequestAccessForm() {
-  if (!process.env.NEXT_PUBLIC_CONVEX_URL) {
+  if (!process.env.NEXT_PUBLIC_CONVEX_URL && process.env.NEXT_PUBLIC_OPENBOOKS_BACKEND !== "postgres") {
     return <StaticRequestAccessForm />;
   }
 

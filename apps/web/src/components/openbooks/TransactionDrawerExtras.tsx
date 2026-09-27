@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation, useQuery } from "convex/react";
+import { useMutation, useQuery } from "@/lib/pg/react";
 import { FileText, ImageIcon, Send, Upload } from "lucide-react";
 import { useRef, useState } from "react";
 
