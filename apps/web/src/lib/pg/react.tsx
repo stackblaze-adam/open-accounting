@@ -1,5 +1,6 @@
 "use client";
 
+import type { FunctionReference, FunctionReturnType, OptionalRestArgs } from "convex/server";
 import { useCallback, useEffect, useState } from "react";
 
 const functionName = Symbol.for("functionName");
@@ -24,7 +25,10 @@ async function callFunction(name: string, args: Record<string, unknown> | undefi
   return body.value;
 }
 
-export function useQuery(reference: unknown, args?: Record<string, unknown> | "skip") {
+export function useQuery<Query extends FunctionReference<"query">>(
+  reference: Query,
+  args?: Query["_args"] | "skip",
+): Query["_returnType"] | undefined {
   const skip = args === "skip";
   const name = refName(reference);
   const argKey = skip ? "" : JSON.stringify(args ?? {});
@@ -56,25 +60,32 @@ export function useQuery(reference: unknown, args?: Record<string, unknown> | "s
 
   if (error) throw error;
   if (skip) return undefined;
-  return value;
+  return value as Query["_returnType"] | undefined;
 }
 
-function mutationFunction(name: string) {
-  const run = (args?: Record<string, unknown>) => callFunction(name, args);
-  return Object.assign(run, {
-    withOptimisticUpdate() {
-      return run;
+function mutationFunction<Mutation extends FunctionReference<"mutation">>(name: string) {
+  const run = (...args: OptionalRestArgs<Mutation>) =>
+    callFunction(name, args[0] as Record<string, unknown> | undefined) as Promise<FunctionReturnType<Mutation>>;
+  const fn = Object.assign(run, {
+    withOptimisticUpdate(_update?: (store: any, args: any) => void) {
+      return fn;
     },
   });
+  return fn;
 }
 
-export function useMutation(reference: unknown) {
+export function useMutation<Mutation extends FunctionReference<"mutation">>(reference: Mutation) {
   const name = refName(reference);
-  return useCallback(() => mutationFunction(name), [name])();
+  return useCallback(() => mutationFunction<Mutation>(name), [name])();
 }
 
-export function useAction(reference: unknown) {
-  return useMutation(reference);
+export function useAction<Action extends FunctionReference<"action">>(reference: Action) {
+  const name = refName(reference);
+  return useCallback(
+    (...args: OptionalRestArgs<Action>) =>
+      callFunction(name, args[0] as Record<string, unknown> | undefined) as Promise<FunctionReturnType<Action>>,
+    [name],
+  );
 }
 
 export function usePaginatedQuery(
@@ -85,7 +96,7 @@ export function usePaginatedQuery(
   const skip = args === "skip";
   const name = refName(reference);
   const argKey = skip ? "" : JSON.stringify(args ?? {});
-  const [results, setResults] = useState<unknown[]>([]);
+  const [results, setResults] = useState<any[]>([]);
   const [status, setStatus] = useState("LoadingFirstPage");
   const [cursor, setCursor] = useState<string | null>(null);
 

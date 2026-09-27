@@ -23,6 +23,7 @@ export function matchExpr(doc: Doc, expr: Expr): boolean {
   if (expr.op === "and") return expr.exprs.every((item) => matchExpr(doc, item));
   if (expr.op === "or") return expr.exprs.some((item) => matchExpr(doc, item));
   if (expr.op === "not") return !matchExpr(doc, expr.expr);
+  if (!("field" in expr)) return false;
   const left = doc[expr.field];
   if (expr.op === "eq") return same(left, expr.value);
   if (expr.op === "neq") return !same(left, expr.value);

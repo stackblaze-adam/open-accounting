@@ -19,7 +19,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@convex-dev/auth/react": ["./src/lib/pg/auth-react.tsx"],
+      "convex/react": ["./src/lib/pg/react.tsx"]
     }
   },
   "include": [

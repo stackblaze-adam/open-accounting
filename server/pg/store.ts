@@ -43,6 +43,10 @@ export function getDb() {
   return db;
 }
 
+function databaseFor(client: PoolClient | undefined) {
+  return client ? drizzle(client) : getDb();
+}
+
 export async function migrate() {
   const client = await getPool().connect();
   try {
@@ -114,7 +118,7 @@ async function queryRows(tableName: string): Promise<Doc[]> {
   const scope = als.getStore();
   const cached = scope?.cache.get(tableName);
   if (cached) return cached;
-  const database = scope?.client ? drizzle(scope.client) : getDb();
+  const database = databaseFor(scope?.client);
   const rows = await database
     .select()
     .from(documents)
@@ -141,7 +145,7 @@ export async function getDoc(id: string): Promise<Doc | null> {
       if (found) return found;
     }
   }
-  const database = scope?.client ? drizzle(scope.client) : getDb();
+  const database = databaseFor(scope?.client);
   const rows = await database.select().from(documents).where(eq(documents.id, id)).limit(1);
   return (rows[0]?.data as Doc | undefined) ?? null;
 }
@@ -154,7 +158,7 @@ export async function insertDoc(tableName: string, value: Record<string, unknown
   const _id = typeof value._id === "string" ? value._id : newId();
   const _creationTime = typeof value._creationTime === "number" ? value._creationTime : Date.now();
   const data = { ...value, _id, _creationTime } as Doc;
-  const database = als.getStore()?.client ? drizzle(als.getStore()!.client) : getDb();
+  const database = databaseFor(als.getStore()?.client);
   await database.insert(documents).values({
     id: _id,
     tableName,
@@ -175,7 +179,7 @@ export async function patchDoc(id: string, patch: Record<string, unknown>) {
     if (value === undefined) delete next[key];
     else next[key] = value;
   }
-  const database = als.getStore()?.client ? drizzle(als.getStore()!.client) : getDb();
+  const database = databaseFor(als.getStore()?.client);
   await database
     .update(documents)
     .set({ data: next })
@@ -189,21 +193,21 @@ export async function replaceDoc(id: string, value: Record<string, unknown>) {
   if (!current) throw new Error(`Document not found: ${id}`);
   const tableName = await tableForId(id);
   const next = { ...value, _id: current._id, _creationTime: current._creationTime } as Doc;
-  const database = als.getStore()?.client ? drizzle(als.getStore()!.client) : getDb();
+  const database = databaseFor(als.getStore()?.client);
   await database.update(documents).set({ data: next }).where(eq(documents.id, id));
   invalidate(tableName);
 }
 
 export async function deleteDoc(id: string) {
   const tableName = await tableForId(id);
-  const database = als.getStore()?.client ? drizzle(als.getStore()!.client) : getDb();
+  const database = databaseFor(als.getStore()?.client);
   await database.delete(documents).where(eq(documents.id, id));
   invalidate(tableName);
 }
 
 async function tableForId(id: string) {
   const scope = als.getStore();
-  const database = scope?.client ? drizzle(scope.client) : getDb();
+  const database = databaseFor(scope?.client);
   const rows = await database
     .select({ tableName: documents.tableName })
     .from(documents)
@@ -214,7 +218,7 @@ async function tableForId(id: string) {
 }
 
 export async function clearTable(tableName: string) {
-  const database = als.getStore()?.client ? drizzle(als.getStore()!.client) : getDb();
+  const database = databaseFor(als.getStore()?.client);
   await database.delete(documents).where(eq(documents.tableName, tableName));
   invalidate(tableName);
 }
